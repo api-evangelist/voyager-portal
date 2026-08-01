@@ -1,0 +1,38 @@
+generated: '2026-07-21'
+method: searched
+source: https://gitlab.com/voyager-portal/voyager-public-api/-/wikis/SOFs
+format: custom
+envelope:
+  shape: '{ message, code }'
+  details: Errors return a JSON body with a human-readable message and a machine-readable
+    code string. Not RFC 9457 application/problem+json.
+problems:
+- status: 400
+  code: E_CARGO_NOT_FOUND
+  title: Cargo not found
+  detail: The cargo referenced by name or externalCargoRefId does not exist.
+  source: https://gitlab.com/voyager-portal/voyager-public-api/-/wikis/SOFs
+- status: 400
+  code: E_COUNTERPARTY_NOT_FOUND
+  title: Counterparty not found
+  detail: The counterparty referenced by externalCounterpartyRefId does not exist.
+  source: https://gitlab.com/voyager-portal/voyager-public-api/-/wikis/SOFs
+- status: 400
+  code: E_UNIT_NOT_FOUND
+  title: Unit not found
+  detail: The measurement unit referenced in the request does not exist.
+  source: https://gitlab.com/voyager-portal/voyager-public-api/-/wikis/SOFs
+- status: 400
+  title: Bad request on task form data
+  detail: The payload contains invalid field properties, fields that are not editable,
+    or references the id of an entity that is not allowed or does not exist.
+  source: https://gitlab.com/voyager-portal/voyager-public-api/-/wikis/Workflows/Save-task
+- status: 403
+  title: Unauthorized task access
+  detail: The user does not have access to the workflow task.
+  source: https://gitlab.com/voyager-portal/voyager-public-api/-/wikis/Workflows/Save-task
+- status: 403
+  title: SOF upload URL expired (S3 AccessDenied)
+  detail: The pre-signed S3 upload URL for a SOF PDF has expired; the PUT returns
+    an XML S3 AccessDenied error. Request a fresh upload URL.
+  source: https://gitlab.com/voyager-portal/voyager-public-api/-/wikis/SOFs

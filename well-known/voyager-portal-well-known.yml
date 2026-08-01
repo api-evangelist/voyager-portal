@@ -1,0 +1,61 @@
+generated: '2026-07-21'
+method: searched
+description: Probe of the /.well-known/ discovery surface across Voyager Portal hosts.
+  No real well-known documents were found. app.voyagerportal.com returns HTTP 200
+  for every path from an SPA catch-all that serves the app's HTML shell (content-type
+  text/html), so those are recorded as spa_catch_all rather than real documents.
+hosts:
+- host: https://www.voyagerportal.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+- host: https://kong.voyagerportal.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+- host: https://app.voyagerportal.com
+  spa_catch_all: true
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    note: SPA HTML shell, not a security.txt document
+  - path: /.well-known/openid-configuration
+    status: 200
+    note: SPA HTML shell, not an OIDC discovery document
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    note: SPA HTML shell
+  - path: /.well-known/api-catalog
+    status: 200
+    note: SPA HTML shell
+  - path: /.well-known/ai-plugin.json
+    status: 200
+    note: SPA HTML shell
+- host: https://api.voyagerportal.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404

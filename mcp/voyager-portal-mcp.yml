@@ -1,0 +1,100 @@
+generated: '2026-07-21'
+method: derived
+status: candidate
+source: https://gitlab.com/voyager-portal/voyager-public-api/-/wikis/home
+description: No official Voyager Portal MCP server was found (docs, npm, MCP registries
+  searched 2026-07-21). This is a candidate tool list derived from the documented
+  public REST API surface; no OpenAPI is published, so tools reference the documented
+  endpoints rather than operationIds.
+server:
+  name: voyager-portal
+  transport: http
+  url: null
+tools:
+- name: list_voyages
+  description: List voyages with filters (code, vessel_id, state, cargo_ids, port_ids, date ranges)
+  source_endpoint: GET /voyages
+- name: get_voyage
+  description: Get a single voyage by id
+  source_endpoint: GET /voyages/:id
+- name: create_voyage
+  description: Create a voyage
+  source_endpoint: POST /voyages
+- name: update_voyage
+  description: Update a voyage
+  source_endpoint: PATCH /voyages/:id
+- name: list_voyage_schedules
+  description: List a voyage's schedules (filter by port or cargo)
+  source_endpoint: GET /voyages/:id/schedules
+- name: create_voyage_schedule
+  description: Add a schedule to a voyage
+  source_endpoint: POST /voyages/:id/schedules
+- name: list_voyage_cargoes
+  description: List a voyage's cargoes
+  source_endpoint: GET /voyages/:id/cargoes
+- name: add_voyage_cargo
+  description: Add a cargo to a voyage
+  source_endpoint: POST /voyages/:id/cargoes
+- name: list_claims
+  description: List demurrage claims
+  source_endpoint: GET /v1/claims
+- name: get_claim
+  description: Get a single claim
+  source_endpoint: GET /v1/claims/:id
+- name: create_claim
+  description: Create a claim
+  source_endpoint: POST /v1/claims
+- name: update_claim
+  description: Update a claim
+  source_endpoint: PATCH /v1/claims/:id
+- name: list_claim_port_calls
+  description: List a claim's port calls
+  source_endpoint: GET /v1/claims/:claimId/port-calls
+- name: upload_sof
+  description: Upload a statement of facts (SOF) PDF for parsing
+  source_endpoint: POST /api/sof/upload
+- name: check_sof_status
+  description: Check parsing status of an uploaded SOF file
+  source_endpoint: GET /api/sof/:sofFileId/check-status
+- name: list_sofs
+  description: List SOFs (filter by date range)
+  source_endpoint: GET /api/v1/sof
+- name: list_cargoes
+  description: List the cargo catalog
+  source_endpoint: GET /cargoes
+- name: list_companies
+  description: List companies (counterparties)
+  source_endpoint: GET /companies
+- name: list_groups
+  description: List user groups
+  source_endpoint: GET /groups
+- name: list_datasets
+  description: List custom datasets
+  source_endpoint: GET /datasets
+- name: get_dataset_row
+  description: Get a dataset row
+  source_endpoint: GET /datasets/:id/rows/:rowId
+- name: list_ports
+  description: List ports (filter by name, country, UN/LOCODE)
+  source_endpoint: GET /ports
+- name: list_regions
+  description: List regions
+  source_endpoint: GET /regions
+- name: list_vessels
+  description: List vessels (filter by name, IMO, MMSI)
+  source_endpoint: GET /vessels
+- name: list_workflow_instances
+  description: List workflow instances (filter by status, model, task, responsible)
+  source_endpoint: GET /workflowinstances
+- name: start_workflow
+  description: Start a workflow instance
+  source_endpoint: POST /workflowinstances/start
+- name: save_workflow_task
+  description: Save form data on a workflow task
+  source_endpoint: PATCH /workflowinstances/tasks/{task_id}/formdata
+- name: complete_workflow_task
+  description: Complete a workflow task
+  source_endpoint: PUT /workflowinstances/tasks/{task_id}/complete
+- name: healthcheck
+  description: Check API health
+  source_endpoint: GET /backend/healthcheck/alive

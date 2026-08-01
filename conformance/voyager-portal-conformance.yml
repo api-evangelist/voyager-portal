@@ -1,0 +1,33 @@
+generated: '2026-07-21'
+method: derived
+source: https://gitlab.com/voyager-portal/voyager-public-api/-/wikis/home
+standards:
+- id: bearer-token-auth
+  conforms: true
+  evidence: Documented Authorization Bearer JWT (IdToken) issued by the platform
+    token endpoint (https://gitlab.com/voyager-portal/voyager-public-api/-/wikis/Authentication).
+- id: oidc
+  conforms: false
+  evidence: No OIDC discovery document published on any probed host.
+- id: openapi
+  conforms: false
+  evidence: No OpenAPI/Swagger specification is published; the API is documented
+    as a GitLab wiki.
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: Documented errors use a custom { message, code } envelope, not
+    application/problem+json.
+- id: pagination
+  conforms: true
+  evidence: Documented page / rowsPerPage pagination convention (default 20, max
+    100) across list endpoints.
+- id: idempotency
+  conforms: false
+  evidence: No idempotency-key mechanism documented.
+- id: webhooks
+  conforms: true
+  evidence: Documented outbound webhook events (Voyage, Cargoes, SOF Validated)
+    with X-Voyager-Token verification header.
+- id: json:api
+  conforms: false
+  evidence: Responses are plain JSON objects/arrays, not JSON:API documents.

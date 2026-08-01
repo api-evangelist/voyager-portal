@@ -1,0 +1,40 @@
+generated: '2026-07-21'
+method: searched
+source: https://gitlab.com/voyager-portal/voyager-public-api/-/wikis/Webhook
+spec_type: Webhooks
+description: Voyager Portal publishes outbound webhooks that push voyage, cargo,
+  and SOF-validated events to a customer-supplied URL. No AsyncAPI document is published;
+  this catalog captures the documented webhook surface.
+configuration:
+  setup: Webhooks are configured per company in the Voyager app under Settings >
+    Companies > Integrations > Webhooks, with an event, a destination URL, and a
+    shared token.
+  verification_header:
+    name: X-Voyager-Token
+    description: Unique shared token sent in the header of every webhook request
+      so receivers can verify the request is coming from Voyager.
+events:
+- name: Voyage
+  trigger: Triggered every time a voyage is created or suspended.
+  docs: https://gitlab.com/voyager-portal/voyager-public-api/-/wikis/Webhook/Voyage
+  payload_highlights:
+  - lastChange.action (add, etc.)
+  - voyage id, code, company_id, laycan_from, laycan_to, vessel_id, status
+  - schedules[] with port, ETA/ETD, and extra_data timeline fields
+- name: Cargoes
+  trigger: Triggered every time a cargo is added, updated, or deleted from a voyage;
+    payloads differ slightly per action.
+  docs: https://gitlab.com/voyager-portal/voyager-public-api/-/wikis/Webhook/Cargoes
+  payload_highlights:
+  - voyage {id, code, vessel}
+  - lastChange {action, cargo {...}} with quantities, units, counterparties
+  - allCargoes[] snapshot of the voyage's cargoes
+- name: SOF Validated
+  trigger: Triggered when a statement of facts (SOF) is validated, either by the
+    SOF Validator or inside a voyage.
+  docs: https://gitlab.com/voyager-portal/voyager-public-api/-/wikis/Webhook/SOF-Validated
+  payload_highlights:
+  - id, voyageCode, fileName, portName, vesselName
+  - terminals[], berths[], cargoes[] with externalCargoRefId
+  - integrationKey - client-supplied unique identifier for the SOF file, echoed
+      back on validation

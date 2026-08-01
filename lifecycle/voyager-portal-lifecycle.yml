@@ -1,0 +1,16 @@
+generated: '2026-07-21'
+method: searched
+source: https://status.voyagerportal.com/
+status_page: https://status.voyagerportal.com/
+status_page_provider: StatusCake
+versioning:
+  scheme: uri-path (partial)
+  details: Newer resources (Claims, SOF) are versioned under /v1; most resources
+    remain unversioned under /api. No formal versioning policy is published.
+deprecation:
+  policy_url: null
+  sunset_header: false
+  details: No deprecation policy or Sunset/Deprecation header support is documented.
+sla:
+  url: null
+deprecated_operations: []

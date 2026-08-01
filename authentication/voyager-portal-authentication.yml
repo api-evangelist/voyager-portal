@@ -1,0 +1,44 @@
+generated: '2026-07-21'
+method: searched
+source: https://gitlab.com/voyager-portal/voyager-public-api/-/wikis/Authentication
+docs: https://gitlab.com/voyager-portal/voyager-public-api/-/wikis/Authentication
+summary:
+  types:
+  - http
+  api_key_in: []
+  oauth2_flows: []
+  notes: Token-based bearer authentication. A POST to the token endpoint with client_id,
+    email, and password returns an IdToken (JWT) that is passed as a Bearer token
+    in the Authorization header. The client_id is issued by the Voyager team. Requests
+    also carry a usr-email header identifying the calling user.
+schemes:
+- name: VoyagerBearerToken
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  token_endpoints:
+  - environment: production
+    url: https://kong.voyagerportal.com/auth/api/token
+  - environment: staging
+    url: https://kong.staging.voyagerportal.com/auth/api/token
+  token_request:
+    method: POST
+    params:
+    - name: client_id
+      description: Client identifier issued by the Voyager team
+    - name: email
+      description: Voyager app login email
+    - name: password
+      description: Voyager app login password
+  usage:
+    header: 'Authorization: Bearer [IdToken]'
+    additional_headers:
+    - name: usr-email
+      description: Email of the user making the request
+  base_urls:
+  - environment: production
+    url: https://kong.voyagerportal.com/api
+  - environment: staging
+    url: https://kong.staging.voyagerportal.com/api
+  sources:
+  - https://gitlab.com/voyager-portal/voyager-public-api/-/wikis/Authentication

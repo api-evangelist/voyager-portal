@@ -1,0 +1,60 @@
+generated: '2026-07-21'
+method: searched
+source: https://gitlab.com/voyager-portal/voyager-public-api/-/wikis/home
+conventions:
+  authentication:
+    style: bearer-token
+    details: POST client_id + email + password to the token endpoint to receive an
+      IdToken (JWT), then send it as Authorization Bearer on every request, plus a
+      usr-email header identifying the calling user.
+    artifact: authentication/voyager-portal-authentication.yml
+    docs: https://gitlab.com/voyager-portal/voyager-public-api/-/wikis/Authentication
+  pagination:
+    style: page-number
+    params:
+    - name: page
+      type: integer
+      default: 1
+      description: Page number
+    - name: rowsPerPage
+      type: integer
+      default: 20
+      max: 100
+      description: Number of items to list per page
+    details: GET list requests return 20 results per page by default; rowsPerPage
+      is capped at 100.
+    docs: https://gitlab.com/voyager-portal/voyager-public-api/-/wikis/Pagination
+  idempotency:
+    supported: false
+    details: No idempotency-key mechanism is documented in the public API docs.
+  versioning:
+    style: mixed
+    details: Most resources are unversioned under /api; newer resources (Claims,
+      SOF) expose /v1 URI-path versions (e.g. /v1/claims, /api/v1/sof).
+  error_envelope:
+    shape: '{ message, code }'
+    format: custom
+    details: Documented error responses return a JSON object with a human message
+      and a machine code (e.g. E_CARGO_NOT_FOUND). Not RFC 9457 problem+json.
+    artifact: errors/voyager-portal-problem-types.yml
+  filtering:
+    style: query-parameters
+    details: List endpoints filter via query params (name, company_id, imo, mmsi,
+      locode, state, date ranges like creationDateFrom/creationDateTo, and array
+      params like cargo_ids[]).
+  webhooks:
+    supported: true
+    signaling_header: X-Voyager-Token
+    details: Outbound webhooks deliver voyage, cargo, and SOF-validated events to
+      a customer URL; requests carry a shared X-Voyager-Token header so receivers
+      can verify the sender.
+    artifact: asyncapi/voyager-portal-webhooks.yml
+  environments:
+    production: https://kong.voyagerportal.com/api
+    staging: https://kong.staging.voyagerportal.com/api
+  request_tracing:
+    supported: false
+    details: No request-id tracing header is documented.
+  rate_limits:
+    documented: false
+    details: No rate-limit policy or headers are documented in the public API docs.

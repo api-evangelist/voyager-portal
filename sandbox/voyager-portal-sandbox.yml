@@ -1,0 +1,19 @@
+generated: '2026-07-21'
+method: searched
+source: https://gitlab.com/voyager-portal/voyager-public-api/-/wikis/Authentication
+description: Voyager Portal publishes a dedicated staging environment for API integration
+  testing, documented alongside production in the public API docs. No public test
+  credentials or magic test values are published; a client_id must be requested from
+  the Voyager team.
+environments:
+- name: staging
+  token_endpoint: https://kong.staging.voyagerportal.com/auth/api/token
+  base_url: https://kong.staging.voyagerportal.com/api
+- name: production
+  token_endpoint: https://kong.voyagerportal.com/auth/api/token
+  base_url: https://kong.voyagerportal.com/api
+test_credentials:
+  published: false
+  details: Tokens are obtained with a Voyager-issued client_id plus a Voyager app
+    login email and password; credentials are provisioned by the Voyager team, not
+    self-serve.

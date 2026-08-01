@@ -1,0 +1,34 @@
+# Voyager Portal
+
+> Voyager Portal is an AI-powered voyage and demurrage management platform for bulk commodity charterers, traders, brokers, and manufacturers. It streamlines maritime shipping workflows from pre-fixture planning through post-fixture claim resolution, and exposes a documented public REST API (bearer-token authenticated, paginated) for voyages, cargoes, claims, SOFs, vessels, ports, companies, datasets, and workflows, plus outbound webhooks for voyage, cargo, and SOF-validated events.
+
+Production base URL: https://kong.voyagerportal.com/api
+Staging base URL: https://kong.staging.voyagerportal.com/api
+Authentication: POST client_id + email + password to https://kong.voyagerportal.com/auth/api/token, then send `Authorization: Bearer [IdToken]` and a `usr-email` header.
+
+## APIs
+
+- [Voyager Public API documentation (GitLab wiki)](https://gitlab.com/voyager-portal/voyager-public-api/-/wikis/home): Index of all REST resources
+- [Authentication](https://gitlab.com/voyager-portal/voyager-public-api/-/wikis/Authentication): How to generate and use an API token
+- [Pagination](https://gitlab.com/voyager-portal/voyager-public-api/-/wikis/Pagination): page / rowsPerPage (default 20, max 100)
+- [Voyages](https://gitlab.com/voyager-portal/voyager-public-api/-/wikis/Voyages): Voyages, schedules, cargoes, toggle status
+- [Claims](https://gitlab.com/voyager-portal/voyager-public-api/-/wikis/Claims): Demurrage claims and claim port-calls (/v1/claims)
+- [SOFs](https://gitlab.com/voyager-portal/voyager-public-api/-/wikis/SOFs): Statement of facts upload, parsing status, retrieval
+- [Cargoes](https://gitlab.com/voyager-portal/voyager-public-api/-/wikis/Cargoes): Cargo catalog and voyage cargo files
+- [Companies](https://gitlab.com/voyager-portal/voyager-public-api/-/wikis/Companies): Companies (counterparties)
+- [Groups](https://gitlab.com/voyager-portal/voyager-public-api/-/wikis/Groups): User groups
+- [Datasets](https://gitlab.com/voyager-portal/voyager-public-api/-/wikis/Datasets): Custom datasets and rows, batch create/update
+- [Ports](https://gitlab.com/voyager-portal/voyager-public-api/-/wikis/Ports): Ports (name, country, UN/LOCODE)
+- [Regions](https://gitlab.com/voyager-portal/voyager-public-api/-/wikis/Regions): Regions
+- [Vessels](https://gitlab.com/voyager-portal/voyager-public-api/-/wikis/Vessels): Vessels (name, IMO, MMSI)
+- [Workflows](https://gitlab.com/voyager-portal/voyager-public-api/-/wikis/Workflows): Workflow instances, tasks, form data
+- [Webhooks](https://gitlab.com/voyager-portal/voyager-public-api/-/wikis/Webhook): Voyage, Cargoes, and SOF Validated events with X-Voyager-Token header
+
+## Docs
+
+- [Website](https://voyagerportal.com/): Product and company information
+- [App login](https://app.voyagerportal.com/): Voyager Portal application
+- [Status page](https://status.voyagerportal.com/): Service status (StatusCake)
+- [Resources / blog](https://www.voyagerportal.com/resources/): Articles and product resources
+- [Privacy policy](https://www.voyagerportal.com/privacy/)
+- [Terms and conditions](https://www.voyagerportal.com/terms-and-conditions/)

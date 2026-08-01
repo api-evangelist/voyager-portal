@@ -1,0 +1,107 @@
+generated: '2026-07-21'
+method: derived
+source: https://gitlab.com/voyager-portal/voyager-public-api/-/wikis/home
+description: Entity-relationship graph derived from documented response examples
+  and id-reference fields in the Voyager Portal public API docs (no OpenAPI is
+  published).
+entities:
+- name: Voyage
+  id_field: id
+  key_fields: [code, company_id, vessel_id, voyage_model_id, status, laycan_from, laycan_to]
+- name: Schedule
+  id_field: id
+  key_fields: [deal_id, port_id, terminal_id, etaDate, etd_sail]
+- name: VoyageCargo
+  id_field: id
+  key_fields: [deal_id, cargo_id, qty, measurement_unit, load_schedule_id, discharge_schedule_id, supplier_id, receiver_id, charterer_id, broker_id]
+- name: Cargo
+  id_field: id
+  key_fields: [name]
+- name: Claim
+  id_field: id
+- name: ClaimPortCall
+  id_field: id
+- name: SOF
+  id_field: id
+  key_fields: [uploadState, integrationKey]
+- name: Company
+  id_field: id
+  key_fields: [name, description]
+- name: Group
+  id_field: id
+  key_fields: [company_id, name]
+- name: Port
+  id_field: id
+  key_fields: [name, country, locode]
+- name: Region
+  id_field: id
+  key_fields: [name]
+- name: Vessel
+  id_field: id
+  key_fields: [name, imo, mmsi]
+- name: WorkflowInstance
+  id_field: id
+  key_fields: [status, model_name]
+- name: WorkflowTask
+  id_field: id
+- name: Dataset
+  id_field: id
+- name: DatasetRow
+  id_field: id
+relationships:
+- from: Voyage
+  to: Schedule
+  type: has_many
+  via: deal_id
+- from: Voyage
+  to: VoyageCargo
+  type: has_many
+  via: deal_id
+- from: Voyage
+  to: Vessel
+  type: belongs_to
+  via: vessel_id
+- from: Voyage
+  to: Company
+  type: belongs_to
+  via: company_id
+- from: Voyage
+  to: WorkflowInstance
+  type: has_many
+  via: voyage_id
+- from: Schedule
+  to: Port
+  type: belongs_to
+  via: port_id
+- from: VoyageCargo
+  to: Cargo
+  type: belongs_to
+  via: cargo_id
+- from: VoyageCargo
+  to: Schedule
+  type: belongs_to
+  via: load_schedule_id / discharge_schedule_id
+- from: VoyageCargo
+  to: Company
+  type: belongs_to
+  via: supplier_id / receiver_id / charterer_id / broker_id
+- from: Claim
+  to: ClaimPortCall
+  type: has_many
+  via: claimId
+- from: Group
+  to: Company
+  type: belongs_to
+  via: company_id
+- from: Dataset
+  to: DatasetRow
+  type: has_many
+  via: rowId
+- from: WorkflowInstance
+  to: WorkflowTask
+  type: has_many
+  via: task id
+- from: SOF
+  to: Voyage
+  type: belongs_to
+  via: voyageCode
