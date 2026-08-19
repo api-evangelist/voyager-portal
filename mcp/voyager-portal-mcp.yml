@@ -2,10 +2,9 @@ generated: '2026-07-21'
 method: derived
 status: candidate
 source: https://gitlab.com/voyager-portal/voyager-public-api/-/wikis/home
-description: No official Voyager Portal MCP server was found (docs, npm, MCP registries
-  searched 2026-07-21). This is a candidate tool list derived from the documented
-  public REST API surface; no OpenAPI is published, so tools reference the documented
-  endpoints rather than operationIds.
+description: No official Voyager Portal MCP server was found (docs, npm, MCP registries searched 2026-07-21).
+  This is a candidate tool list derived from the documented public REST API surface; no OpenAPI is published,
+  so tools reference the documented endpoints rather than operationIds.
 server:
   name: voyager-portal
   transport: http
@@ -98,3 +97,9 @@ tools:
 - name: healthcheck
   description: Check API health
   source_endpoint: GET /backend/healthcheck/alive
+deployment:
+  mode: none
+  verified: derived
+  tools: 29
+  checked: '2026-08-12'
+  source: catalog MCP census
